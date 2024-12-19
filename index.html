@@ -1,0 +1,143 @@
+
+  <!-- Question6 -->
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Marks Calculator</title>
+        <script src="app.js"></script>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 20px;
+                background-color: aqua;
+            }
+            input, button {
+                margin: 10px 0;
+            }
+            table {
+                margin-top: 20px;
+                border-collapse: collapse;
+                width: 50%;
+            }
+            table, th, td {
+                border: 1px solid black;
+                text-align: center;
+                padding: 8px;
+            }
+
+            button{
+                background-color: green;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                width: 130px;
+                height: 40px;
+                border-radius: 8px;
+                margin-left: 40px;
+
+            }
+
+            label{
+                margin-left: 40px;
+            }
+
+            input{
+                width: 230;
+                height: 40px;
+                margin-left: 30px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Marks Calculator</h1>
+    
+        <label for="subject1">Enter first subject name:</label>
+        <input type="text" id="subject1" placeholder="Subject 1" /><br>
+    
+        <label for="subject2">Enter second subject name:</label>
+        <input type="text" id="subject2" placeholder="Subject 2" /><br>
+    
+        <label for="subject3">Enter third subject name:</label>
+        <input type="text" id="subject3" placeholder="Subject 3" /><br>
+    
+        <label for="marks1">Enter obtained marks for first subject:</label>
+        <input type="number" id="marks1" placeholder="Marks for Subject 1" /><br>
+    
+        <label for="marks2">Enter obtained marks for second subject:</label>
+        <input type="number" id="marks2" placeholder="Marks for Subject 2" /><br>
+    
+        <label for="marks3">Enter obtained marks for third subject:</label>
+        <input type="number" id="marks3" placeholder="Marks for Subject 3" /><br>
+    
+        <button onclick="calculateMarks()">Calculate</button>
+    
+        <h2>Result:</h2>
+        <div id="result"></div>
+    
+        <script>
+            function calculateMarks() {
+                // a) Get subject names
+                let subject1 = document.getElementById("subject1").value;
+                let subject2 = document.getElementById("subject2").value;
+                let subject3 = document.getElementById("subject3").value;
+    
+                // b) Total marks for each subject
+                let totalMarksPerSubject = 100;
+    
+                // c) Get obtained marks
+                let marks1 = parseFloat(document.getElementById("marks1").value);
+                let marks2 = parseFloat(document.getElementById("marks2").value);
+                let marks3 = parseFloat(document.getElementById("marks3").value);
+    
+                // Validate inputs
+                if (!subject1 || !subject2 || !subject3 || isNaN(marks1) || isNaN(marks2) || isNaN(marks3)) {
+                    document.getElementById("result").innerHTML = "Please enter all the required fields.";
+                    return;
+                }
+    
+                // Calculate total and percentage
+                let totalObtainedMarks = marks1 + marks2 + marks3;
+                let grandTotalMarks = totalMarksPerSubject * 3;
+                let percentage = (totalObtainedMarks / grandTotalMarks) * 100;
+    
+                // Display results in a table
+                let resultHTML = `
+                    <table>
+                        <tr>
+                            <th>Subject</th>
+                            <th>Obtained Marks</th>
+                            <th>Total Marks</th>
+                        </tr>
+                        <tr>
+                            <td>${subject1}</td>
+                            <td>${marks1}</td>
+                            <td>${totalMarksPerSubject}</td>
+                        </tr>
+                        <tr>
+                            <td>${subject2}</td>
+                            <td>${marks2}</td>
+                            <td>${totalMarksPerSubject}</td>
+                        </tr>
+                        <tr>
+                            <td>${subject3}</td>
+                            <td>${marks3}</td>
+                            <td>${totalMarksPerSubject}</td>
+                        </tr>
+                        <tr>
+                            <th>Total</th>
+                            <th>${totalObtainedMarks}</th>
+                            <th>${grandTotalMarks}</th>
+                        </tr>
+                        <tr>
+                            <th colspan="2">Percentage</th>
+                            <th>${percentage.toFixed(2)}%</th>
+                        </tr>
+                    </table>
+                `;
+    
+                document.getElementById("result").innerHTML = resultHTML;
+            }
+        </script>
+    </body>
+    </html>
+    
